@@ -1,0 +1,499 @@
+/**
+ * @name DoubleTheme
+ * @author mxnke
+ * @version 1.2.3
+ * @description A focused, readable neutral glass theme for Discord/Vesktop.
+ * @invite FdZhbjY
+ */
+
+/* Keep the original feature set as the foundation. */
+@import url("https://puckzxz.github.io/NotAnotherAnimeTheme/build/v3/naat.v3.css");
+
+:root {
+  /* -----------------------------------------------------------------------
+   * DoubleTheme palette and layout
+   * ----------------------------------------------------------------------- */
+  --theme-background-image: url("https://i.imgur.com/1gkC1WU.jpeg");
+  --main-theme-color: rgb(82, 137, 224);
+  --main-theme-color-rgb: 82, 137, 224;
+  --theme-transparency: rgba(10, 10, 12, 0.6);
+  --theme-surface-strong: rgba(16, 16, 19, 0.93);
+  --theme-surface-soft: rgba(255, 255, 255, 0.055);
+  --theme-border: rgba(255, 255, 255, 0.12);
+  --theme-border-strong: rgba(255, 255, 255, 0.2);
+  --theme-shadow: 0 14px 35px rgba(0, 0, 0, 0.28);
+  --theme-radius: 10px;
+  --theme-radius-small: 7px;
+
+  /* Secondary accent shared by category hover and discovery icons. */
+  --theme-accent-green: #70d6b3;
+
+  /* Home icon: use Discord's native icon. */
+  --home-icon-image: none;
+  --home-icon-image-position: center center;
+  --home-icon-image-zoom: 100%;
+
+  /* Server listing: 62px single, 126px double, 184px triple, 242px quad. */
+  --server-listing-width: 126px;
+  --server-icon-radius: 14px;
+
+  /* Typography */
+  --font-size: 105%;
+  --font-primary: "Inter", "gg sans", "Noto Sans", sans-serif;
+  --font-display: "Inter", "gg sans", "Noto Sans", sans-serif;
+
+  /* Mentions */
+  --mention-color: rgba(var(--main-theme-color-rgb), 0.16);
+  --mention-sider: var(--main-theme-color);
+  --mention-side-color: var(--main-theme-color);
+  --mention-hover-color: rgba(var(--main-theme-color-rgb), 0.25);
+
+  /* Server notification badges: a lighter, translucent, still noticeable
+   * blue. `-strong` is used for borders/outlines so the badge keeps a crisp
+   * edge despite the translucent fill. */
+  --notification-color: rgba(140, 178, 245, 0.55);
+  --notification-color-strong: rgba(140, 178, 245, 0.9);
+
+  /* Channels and categories */
+  --category-hover-color: var(--theme-accent-green);
+  --text-voice-channel-color: rgb(163, 173, 190);
+  --text-voice-channel-hover-color: #eef0f3;
+  --text-voice-channel-selected-text-color: #ffffff;
+  --unread-text-channel-color: #ffffff;
+  --unread-text-channel-bubble-color: var(--main-theme-color);
+
+  /* Disable the remote rainbow unread animation; the unread ring itself is
+   * removed in the polish layer, leaving only the mention count badge. */
+  --unread-server-animation: none;
+
+  /* Video / screen-share controls. Keep the legacy `hovor` names below for
+   * compatibility with the upstream stylesheet. */
+  --video-screen-button-background-color: rgba(255, 255, 255, 0.1);
+  --video-screen-button-foreground-color: #ffffff;
+  --video-screen-button-background-hover-color: rgba(var(--main-theme-color-rgb), 0.48);
+  --video-screen-button-foreground-hover-color: #ffffff;
+  --video-screen-button-background-hovor-color: var(--video-screen-button-background-hover-color);
+  --video-screen-button-foreground-hovor-color: var(--video-screen-button-foreground-hover-color);
+
+  /* Member list and popouts */
+  --member-listing-role-color: var(--main-theme-color);
+  --small-user-popout-background-image: var(--theme-background-image);
+  --small-user-popout-background-transparency: rgba(10, 10, 12, 0.88);
+  --small-user-popout-background-image-position: center;
+  --big-user-popout-background-image: var(--theme-background-image);
+  --big-user-popout-background-transparency: rgba(10, 10, 12, 0.88);
+  --big-user-popout-background-image-position: center;
+
+  /* Messages, code, embeds and menus */
+  --code-markup-background-color: rgba(0, 0, 0, 0.42);
+  --code-markup-border: 1px solid var(--theme-border);
+  --message-box-transparency: rgba(13, 13, 15, 0.9);
+  --embed-background-transparency: rgba(13, 13, 15, 0.55);
+  --message-hover-buttons-background: rgba(255, 255, 255, 0.1);
+  --context-menu-transparency: rgba(16, 16, 19, 0.94);
+
+  /* Add server / discovery */
+  --add-discover-icon-transparency: rgba(255, 255, 255, 0.1);
+  --add-discover-icon-color: var(--theme-accent-green);
+
+  /* Channel limits and scrolling */
+  --channel-limit-count-color: var(--channels-default);
+  --channel-limit-background-left: rgba(255, 255, 255, 0.08);
+  --channel-limit-background-right: rgba(255, 255, 255, 0.14);
+  --scrollbar-color: rgba(255, 255, 255, 0.22);
+  --scrollbar-color-hover: rgba(255, 255, 255, 0.34);
+
+  /* Unread indicators */
+  --unread-message-divider-color: var(--main-theme-color);
+  --unread-message-divider-font-color: #ffffff;
+  --new-messages-bar-background-color: var(--main-theme-color);
+  --new-messages-bar-font-color: #ffffff;
+
+  /* Emoji menu */
+  --emoji-menu-background-color: rgba(13, 13, 15, 0.94);
+  --emoji-menu-sider-background-color: rgba(255, 255, 255, 0.035);
+  --emoji-menu-server-header-background-color: rgba(13, 13, 15, 0.96);
+  --emoji-menu-bottom-bar-background-color: rgba(6, 6, 8, 0.96);
+  --emoji-menu-search-bar-background-color: rgba(255, 255, 255, 0.08);
+
+  /* Message search */
+  --message-search-menu-background-color: rgba(13, 13, 15, 0.96);
+  --message-search-container-background-color: rgba(13, 13, 15, 0.86);
+  --message-search-result-background-color: rgba(255, 255, 255, 0.06);
+
+  /* Folders and reactions */
+  --folder-background-color: rgba(255, 255, 255, 0.11);
+  --expanded-folder-background-color: rgba(255, 255, 255, 0.045);
+  --reaction-emoji-background-color: var(--theme-surface-soft);
+  --reaction-emoji-border-color: 1px solid var(--theme-border);
+  --reaction-emoji-hover-background-color: rgba(var(--main-theme-color-rgb), 0.2);
+  --reaction-emoji-hover-border-color: rgba(var(--main-theme-color-rgb), 0.55);
+}
+
+/* Make Discord's own semantic colors agree with the theme in both modes:
+ * the glass surfaces assume a dark base, so light mode gets the same
+ * treatment instead of half-styled white panels. */
+.theme-dark,
+.theme-light {
+  --background-primary: transparent;
+  --background-secondary: transparent;
+  --background-secondary-alt: rgba(13, 13, 15, 0.48);
+  --background-tertiary: rgba(10, 10, 12, 0.52);
+  --background-floating: var(--theme-surface-strong);
+  --background-mobile-primary: transparent;
+  --background-mobile-secondary: rgba(13, 13, 15, 0.9);
+  --background-modifier-hover: rgba(255, 255, 255, 0.075);
+  --background-modifier-active: rgba(255, 255, 255, 0.12);
+  --background-modifier-selected: rgba(255, 255, 255, 0.16);
+  --background-modifier-accent: rgba(255, 255, 255, 0.11);
+  --background-message-hover: rgba(255, 255, 255, 0.045);
+  --background-mentioned: rgba(var(--main-theme-color-rgb), 0.16);
+  --background-mentioned-hover: rgba(var(--main-theme-color-rgb), 0.25);
+  --mention-background: rgba(var(--main-theme-color-rgb), 0.16);
+  --mention-background-hover: rgba(var(--main-theme-color-rgb), 0.25);
+  --header-primary: #f5f6f8;
+  --header-secondary: #b8c3d6;
+  --text-normal: #e3e9f5;
+  --text-muted: #9ba8bd;
+  --channels-default: #a4afc2;
+  --interactive-normal: #bdc8da;
+  --interactive-hover: #f1f3f6;
+  --interactive-active: #ffffff;
+  --interactive-muted: #657188;
+  --brand-experiment: var(--main-theme-color);
+  --brand-experiment-360: var(--main-theme-color);
+}
+
+/* -------------------------------------------------------------------------
+ * Local polish layer
+ * ------------------------------------------------------------------------- */
+
+html,
+body {
+  font-family: var(--font-primary);
+}
+
+/* No `fixed` attachment on purpose. `background-attachment: fixed` forces
+ * Chromium to repaint the full wallpaper on the main thread in every frame
+ * where content above it changes, and it cannot be compositor-cached.
+ * Discord's own body never scrolls, so `scroll` looks identical while
+ * keeping the wallpaper cheap to composite. A fixed attachment combined
+ * with backdrop blurs was able to stall the renderer (e.g. a hard freeze
+ * when accepting a friend request animates the pending row away). */
+body {
+  background: #0a0a0c var(--theme-background-image) center / cover scroll no-repeat;
+}
+
+/* The imported stylesheet paints backdrop-filter blur on many panels:
+ * friends-list row cards (itemCard), the account panel (panels), search
+ * bars, embeds and footers. Blur over the wallpaper is the most expensive
+ * effect in this whole theme stack and re-rastering it during list
+ * animations stalled the renderer. Strip every blur; the translucent fills
+ * underneath already give the glass look, and no other rule re-adds one. */
+[class*="itemCard"],
+[class*="panels"],
+[class*="searchBar"],
+[class*="embedFull"],
+[class*="footer"],
+[class*="textContainer"],
+[class*="mainCard"] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Preserve the wallpaper through Discord's app shell. appMount/app must go
+ * transparent so the body wallpaper shows, but the `bg` element is the scrim
+ * that carries --theme-transparency: blanking it (as an earlier version of
+ * this rule did) makes the transparency variable have no effect at all. */
+[class*="appMount"],
+[class*="app-"],
+[class*="app_"] {
+  background-color: transparent;
+}
+
+/* Paint the scrim explicitly so --theme-transparency always controls how
+ * strongly the wallpaper is dimmed, independent of the imported stylesheet. */
+[class*="bg-"],
+[class*="bg_"] {
+  background: var(--theme-transparency) !important;
+}
+
+[class*="layer-"] [role="dialog"],
+[class*="layer_"] [role="dialog"],
+[class*="contextMenu-"],
+[class*="contextMenu_"],
+[role="menu"] {
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius);
+  box-shadow: var(--theme-shadow);
+}
+
+[class*="channelTextArea"] {
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius);
+  background: var(--message-box-transparency);
+  transition: border-color 160ms ease;
+}
+
+/* Clicking or focusing the message input must not flash blue: no accent
+ * border, ring or glow. The border only brightens to its neutral strong
+ * color, and any client-side glow is explicitly stripped. */
+[class*="channelTextArea"]:focus-within {
+  border-color: var(--theme-border-strong) !important;
+  box-shadow: none !important;
+}
+
+[class*="markup"] code,
+code[class*="inlineCode"] {
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-small);
+  background: var(--code-markup-background-color);
+}
+
+/* Use the theme blue for every message mention/ping treatment. */
+[class*="mentioned"] {
+  background-color: var(--mention-color) !important;
+}
+
+[class*="mentioned"]::before {
+  background-color: var(--mention-sider) !important;
+}
+
+[class*="mentioned"]:hover {
+  background-color: var(--mention-hover-color) !important;
+}
+
+/* Keep the server icon shape consistent with the theme radius. The unread
+ * ring that used to live around it is removed further below. */
+[data-list-id="guildsnav"] [class*="listItem"] [class*="wrapper"],
+[class*="guilds"] [class*="listItem"] [class*="wrapper"] {
+  box-sizing: border-box !important;
+  border-radius: var(--server-icon-radius) !important;
+}
+
+/* Remove the unread ring (the "rainbow" border preview) around server icons
+ * entirely. The imported stylesheet repurposes Discord's unread pill marker
+ * (a pill+"wrapper" element holding an "item" span) into that ring; hiding
+ * the marker leaves only the mention count badge as a notification. Discord's
+ * guilds nav markup differs between builds, so match through several
+ * independent hooks: the nav's data-list-id, each row's data-list-item-id,
+ * any "guilds"-classed ancestor, and the stable "item__"/"pill" class stems
+ * regardless of their hash suffix. */
+[data-list-id="guildsnav"] [class*="pill"][class*="wrapper"] [class*="item"],
+[data-list-id="guildsnav"] [class*="item__"],
+[data-list-item-id*="guildsnav"] [class*="pill"][class*="wrapper"] [class*="item"],
+[data-list-item-id*="guildsnav"] [class*="item__"],
+[class*="guilds"] [class*="pill"][class*="wrapper"] [class*="item"] {
+  display: none !important;
+}
+
+/* If a build draws the ring on the pill wrapper itself or via a pseudo
+ * element instead of the item span, strip those hooks too. */
+[data-list-id="guildsnav"] [class*="pill"][class*="wrapper"],
+[data-list-item-id*="guildsnav"] [class*="pill"][class*="wrapper"],
+[class*="guilds"] [class*="pill"][class*="wrapper"] {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+[data-list-id="guildsnav"] [class*="pill"][class*="wrapper"]::before,
+[data-list-id="guildsnav"] [class*="pill"][class*="wrapper"]::after,
+[data-list-item-id*="guildsnav"] [class*="pill"][class*="wrapper"]::before,
+[data-list-item-id*="guildsnav"] [class*="pill"][class*="wrapper"]::after,
+[class*="guilds"] [class*="pill"][class*="wrapper"]::before,
+[class*="guilds"] [class*="pill"][class*="wrapper"]::after,
+[data-list-id="guildsnav"] [class*="unread"]::before,
+[data-list-id="guildsnav"] [class*="unread"]::after,
+[data-list-item-id*="guildsnav"] [class*="unread"]::before,
+[data-list-item-id*="guildsnav"] [class*="unread"]::after,
+[class*="guilds"] [class*="unread"]::before,
+[class*="guilds"] [class*="unread"]::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Last resort: no element anywhere inside a server row may paint a border,
+ * ring, glow or filter-based hue animation. This is unconditional so it
+ * holds no matter how the client marks the unread state. */
+[data-list-id="guildsnav"] [class*="wrapper"],
+[data-list-item-id*="guildsnav"] [class*="wrapper"],
+[class*="guilds"] [class*="wrapper"] {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+  animation: none !important;
+}
+
+/* Badge-free unread states keep no border either; mention badges are styled
+ * further below and must not be caught by this strip. */
+[data-list-id="guildsnav"] [class*="listItem"]:has([class*="unread"]) [class*="wrapper"],
+[class*="guilds"] [class*="listItem"]:has([class*="unread"]) [class*="wrapper"],
+[data-list-id="guildsnav"] [aria-label*="unread" i],
+[class*="guilds"] [aria-label*="unread" i] {
+  animation: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+[data-list-id="guildsnav"] [class*="numberBadge"],
+[class*="guilds"] [class*="numberBadge"],
+[data-list-id="guildsnav"] [aria-label*="mention" i]:not([class*="wrapper"]),
+[class*="guilds"] [aria-label*="mention" i]:not([class*="wrapper"]) {
+  background: var(--notification-color) !important;
+  background-color: var(--notification-color) !important;
+  border: 1px solid var(--notification-color-strong) !important;
+  box-sizing: border-box !important;
+  color: #ffffff !important;
+}
+
+/* Catch the alternate server-list markup used by newer Discord builds. */
+[data-list-id="guildsnav"] [class*="listItem"]:has([class*="numberBadge"]) [class*="wrapper"],
+[class*="guilds"] [class*="listItem"]:has([class*="numberBadge"]) [class*="wrapper"],
+[data-list-id="guildsnav"] [class*="listItem"]:has([class*="mention"]) [class*="wrapper"],
+[class*="guilds"] [class*="listItem"]:has([class*="mention"]) [class*="wrapper"] {
+  animation: none !important;
+  border: 0 !important;
+  border-image: none !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+[data-list-id="guildsnav"] [class*="badge-"],
+[data-list-id="guildsnav"] [class*="badge_"],
+[class*="guilds"] [class*="badge-"],
+[class*="guilds"] [class*="badge_"],
+[data-list-id="guildsnav"] [class*="mention"],
+[class*="guilds"] [class*="mention"] {
+  background: var(--notification-color) !important;
+  background-color: var(--notification-color) !important;
+  border-color: var(--notification-color-strong) !important;
+  color: #ffffff !important;
+}
+
+/* Restore Discord's native Home glyph after disabling the custom image. */
+[data-list-item-id="guildsnav___home"] [class*="childWrapper"],
+[aria-label="Home"] [class*="childWrapper"] {
+  background: transparent !important;
+  background-image: none !important;
+  color: var(--interactive-normal) !important;
+  overflow: visible !important;
+}
+
+[data-list-item-id="guildsnav___home"] [class*="childWrapper"] svg,
+[aria-label="Home"] [class*="childWrapper"] svg,
+[data-list-item-id="guildsnav___home"] [class*="homeIcon"],
+[aria-label="Home"] [class*="homeIcon"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: currentColor !important;
+  fill: currentColor !important;
+  width: 40px !important;
+  height: 40px !important;
+  max-width: 40px !important;
+  max-height: 40px !important;
+}
+
+/* Remove the new-messages prompt from the message view. */
+[class*="newMessagesBar"],
+[class*="jumpToPresentBar"],
+[aria-label*="New Messages" i],
+[aria-label*="Jump to Present" i] {
+  display: none !important;
+}
+
+/* Clean up Vesktop's top navigation/title controls. */
+[aria-label="Back"],
+[aria-label="Forward"],
+[aria-label="Go Back"],
+[aria-label="Go Forward"],
+[aria-label="Inbox"],
+[aria-label="Help"],
+[aria-label="Support"],
+[aria-label="Open Help"],
+[class*="backForwardButtons"],
+[class*="titleBar"] [class*="title"],
+[class*="titleBar"] [class*="name"] {
+  display: none !important;
+}
+
+/* Remove the Nitro navigation entry and quest UI while leaving Shop intact. */
+[data-list-item-id="guildsnav___nitro"],
+[data-list-item-id*="nitro"],
+nav [aria-label="Nitro"] {
+  display: none !important;
+}
+
+/* Hide quest UI. IMPORTANT: quest class stems are only matched through
+ * their full capitalized names or exact labels. Substring hooks like
+ * [class*="quest_"] or case-insensitive [aria-label*="quest" i] also match
+ * inside the word "reQuest" — i.e. every friend-request element in the
+ * client — and hiding those broke the friend-request accept flow. */
+[data-list-item-id="guildsnav___quests"],
+[data-list-item-id*="quests"],
+nav [aria-label="Quests"],
+[role="dialog"][aria-label="Quests"],
+[class*="questPopout"],
+[class*="questPopup"],
+[class*="questCard"],
+[class*="questModal"],
+[class*="questPanel"],
+[class*="questContainer"] {
+  display: none !important;
+}
+
+/* Keep hover and focus states visible for keyboard and pointer users. */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--main-theme-color);
+  outline-offset: 2px;
+}
+
+/* ...except on the message input itself: focusing it must not paint the
+ * blue keyboard outline. Controls inside the input area (emoji, gift, etc.)
+ * keep their outline. */
+[class*="channelTextArea"] [contenteditable]:focus,
+[class*="channelTextArea"] [contenteditable]:focus-visible,
+[class*="channelTextArea"][tabindex]:focus-visible {
+  outline: none !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: var(--scrollbar-color);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-color-hover);
+  background-clip: padding-box;
+}
+
+/* Respect the user's motion preference and avoid a flashing unread effect. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
